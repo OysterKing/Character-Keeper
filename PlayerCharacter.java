@@ -139,16 +139,6 @@ public class PlayerCharacter {
 			}
 	}
 	
-	public void print_basic_info(){
-		System.out.println("Name: " + name);
-		System.out.println("Race: " + race);
-		System.out.println("Class: " + character_class);
-		System.out.println("Level: " + level);
-		System.out.println("Age: " + age);
-		System.out.println("Height(cm): " + height);
-		System.out.println("Weight(kilo): " + weight);
-	}
-	
 	public class Ability{
 			private String ability_name;
 			int value;
@@ -194,6 +184,28 @@ public class PlayerCharacter {
 			public void printSkill(){
 				System.out.println(skill_name + ": " + "+" + skill_mod);
 			}
+	}
+	
+	public void print_basic_info(){
+		System.out.println("Name: " + name);
+		System.out.println("Race: " + race);
+		System.out.println("Class: " + character_class);
+		System.out.println("Level: " + level);
+		System.out.println("Age: " + age);
+		System.out.println("Height(cm): " + height);
+		System.out.println("Weight(kilo): " + weight);
+	}
+	
+	public void printAbilityTable(){
+		for(int i=0; i < abilities.length; i++){
+			abilities[i].printAbility();
+		}
+	}
+	
+	public void printSkillTable(){
+		for(int i=0; i < skills.length; i++){
+			skills[i].printSkill();
+		}
 	}
 	
 }
