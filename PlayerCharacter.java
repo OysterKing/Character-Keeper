@@ -30,7 +30,7 @@ public class PlayerCharacter {
 				}
 				
 				if(i == 2){
-					abilities[i] = new Ability("Dexterity", 15);
+					abilities[i] = new Ability("Dexterity", 14);
 					abilities[i].calculateAbilityMod();
 				}
 				
@@ -40,7 +40,7 @@ public class PlayerCharacter {
 				}
 				
 				if(i == 4){
-					abilities[i] = new Ability("Wisdom", 12);
+					abilities[i] = new Ability("Wisdom", 14);
 					abilities[i].calculateAbilityMod();
 				}
 				
@@ -63,7 +63,7 @@ public class PlayerCharacter {
 				}
 				
 				if(i == 2){
-					skills[i] = new Skill("Athletics", false, 0);
+					skills[i] = new Skill("Athletics", true, 0);
 					skills[i].calculateSkillMod();
 				}
 				
@@ -103,7 +103,7 @@ public class PlayerCharacter {
 				}
 				
 				if(i == 10){
-					skills[i] = new Skill("Intimidate", true, 5);
+					skills[i] = new Skill("Intimidate", false, 5);
 					skills[i].calculateSkillMod();
 				}
 				
@@ -152,7 +152,7 @@ public class PlayerCharacter {
 			}
 			
 			public void calculateAbilityMod(){
-					int temp = value - lowest_value;
+					int temp = value - lowest_value - 1;
 					modifier = lowest_mod + temp/2 + level/2;
 			}
 			
@@ -174,11 +174,11 @@ public class PlayerCharacter {
 			}
 			
 			public void calculateSkillMod(){
-				if(trained){
-					skill_mod += 5;
+				if(trained == true){
+					skill_mod = skill_mod + 5;
 				}
 				
-				skill_mod = skill_mod + abilities[abilityIndex].value + level/2;
+				skill_mod = skill_mod + abilities[abilityIndex].modifier + level/2;
 			}
 			
 			public void printSkill(){
