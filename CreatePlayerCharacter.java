@@ -1,4 +1,5 @@
 
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 /*Comhghall McKeating
@@ -7,8 +8,6 @@ import java.util.Scanner;
  */
 
 public class CreatePlayerCharacter {
-	
-	int[] temp = new int[6];
 	
 	public void enterValues(){ 
 		Scanner in = new Scanner(System.in);
@@ -22,13 +21,19 @@ public class CreatePlayerCharacter {
 		attributeNames[4] = "WISDOM";
 		attributeNames[5] = "CHARISMA";
 		
-		for(int i = 0; i < temp.length; i++){
+		try{
+			PrintWriter out = new PrintWriter("CharacterTest.txt");
+			for(int i = 0; i < 6; i++){
 			
-			System.out.println("Enter base " + attributeNames[i] + ": ");
-			temp[i] = in.nextInt();
-		}
-		
-		/*Need to add the information entered into a file that can be read by the Player character class*/
+				System.out.println("Enter base " + attributeNames[i] + ": ");
+				out.println(in.nextInt());
+			}
+			
+			out.close();
+			
+		}catch(Exception ex){
+			System.out.println("Exception " + ex.getMessage() + " caught.");
+		}	
 		
 	}
 
