@@ -1,3 +1,6 @@
+import java.io.FileReader;
+import java.util.Scanner;
+
 
 /* Comhghall McKeating
  * Basic player character class
@@ -5,50 +8,35 @@
 
 public class PlayerCharacter {
 	String name, race, character_class;
-	int level, age, height, weight;
+	int level = 1, age, height, weight;
 	Ability[] abilities = new Ability[6];
 	Skill[] skills = new Skill[17];
+	String[] abilityNames = new String[6];
 	
-	public PlayerCharacter(String n, String r, String char_class, int lvl, int a, int h, int w){
+	public PlayerCharacter(String n, String r, String char_class, int a, int h, int w){
 			name = n;
 			race = r;
 			age = a;
 			character_class = char_class;
-			level = lvl;
 			height = h;
 			weight = w;
 			
-			for(int i = 0; i < abilities.length; i++){
-				if(i == 0){
-					abilities[i] = new Ability("Strength", 18);
+			abilityNames[0] = "STRENGTH";
+			abilityNames[1] = "CONSTITUTION";
+			abilityNames[2] = "DEXTERITY";
+			abilityNames[3] = "INTELLIGENCE";
+			abilityNames[4] = "WISDOM";
+			abilityNames[5] = "CHARISMA";
+			
+			try{
+				FileReader readFile = new FileReader("CharacterAttributes.txt");
+				Scanner in = new Scanner(readFile);
+				for(int i = 0; i < 6; i++){
+					abilities[i] = new Ability(abilityNames[i], Integer.parseInt(in.nextLine()));
 					abilities[i].calculateAbilityMod();
 				}
-				
-				if(i == 1){
-					abilities[i] = new Ability("Constitution", 18);
-					abilities[i].calculateAbilityMod();
-				}
-				
-				if(i == 2){
-					abilities[i] = new Ability("Dexterity", 14);
-					abilities[i].calculateAbilityMod();
-				}
-				
-				if(i == 3){
-					abilities[i] = new Ability("Intelligence", 10);
-					abilities[i].calculateAbilityMod();
-				}
-				
-				if(i == 4){
-					abilities[i] = new Ability("Wisdom", 14);
-					abilities[i].calculateAbilityMod();
-				}
-				
-				if(i == 5){
-					abilities[i] = new Ability("Charisma", 8);
-					abilities[i].calculateAbilityMod();
-				}
-					
+			}catch(Exception ex){
+				System.out.println("Exception " + ex.getMessage() + " caught.");
 			}
 			
 			for(int i = 0; i < skills.length; i++){
@@ -140,24 +128,24 @@ public class PlayerCharacter {
 	}
 	
 	public class Ability{
-			private String ability_name;
 			int value;
+			String abilityName;
 			private int modifier;
 			private int lowest_mod = -4;
 			private int lowest_value = 2;
 			
 			public Ability(String name, int val){
-				ability_name = name;
 				value = val;
+				abilityName = name;
 			}
 			
 			public void calculateAbilityMod(){
-					int temp = value - lowest_value - 1;
+					int temp = value - lowest_value;
 					modifier = lowest_mod + temp/2 + level/2;
 			}
 			
 			public void printAbility(){
-				System.out.println(ability_name + ": " + value + " -> " + modifier);
+				System.out.println(abilityName + ": " + value + " -> " + modifier);
 			}
 	}
 	
