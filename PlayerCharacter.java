@@ -7,29 +7,37 @@ import java.util.Scanner;
  */
 
 public class PlayerCharacter {
-	String name, race, character_class;
-	int level = 1, age, height, weight;
+	String name, race, character_class, characterFilePrefix;
+	int level = 1; 
+	int age, height, weight;
 	Ability[] abilities = new Ability[6];
 	Skill[] skills = new Skill[17];
 	String[] abilityNames = new String[6];
+	String[] skillNames = new String[17];
 	
 	public PlayerCharacter(String n, String r, String char_class, int a, int h, int w){
 			name = n;
+			characterFilePrefix = n;
 			race = r;
 			age = a;
 			character_class = char_class;
 			height = h;
 			weight = w;
 			
-			abilityNames[0] = "STRENGTH";
+			//this array makes the code look a little neater as we can iterate through
+			//it rather than have many conditions as when creating the skills.
+			
+			abilityNames[0] = "STRENGTH"; 
 			abilityNames[1] = "CONSTITUTION";
 			abilityNames[2] = "DEXTERITY";
 			abilityNames[3] = "INTELLIGENCE";
 			abilityNames[4] = "WISDOM";
 			abilityNames[5] = "CHARISMA";
 			
+			//Load Abilities. Read in from a file created by the CreatePlayerCharacterClass
+			
 			try{
-				FileReader readFile = new FileReader("CharacterAttributes.txt");
+				FileReader readFile = new FileReader(characterFilePrefix + "Attributes.txt");
 				Scanner in = new Scanner(readFile);
 				for(int i = 0; i < 6; i++){
 					abilities[i] = new Ability(abilityNames[i], Integer.parseInt(in.nextLine()));
@@ -38,6 +46,8 @@ public class PlayerCharacter {
 			}catch(Exception ex){
 				System.out.println("Exception " + ex.getMessage() + " caught.");
 			}
+			
+			//Load skills.
 			
 			for(int i = 0; i < skills.length; i++){
 				if(i == 0){
@@ -170,7 +180,14 @@ public class PlayerCharacter {
 			}
 			
 			public void printSkill(){
-				System.out.println(skill_name + ": " + "+" + skill_mod);
+				
+				if(skill_mod < 0){
+					System.out.println(skill_name + ": " + skill_mod);
+				}
+				
+				else{
+					System.out.println(skill_name + ": " + "+ " + skill_mod);
+				}
 			}
 	}
 	

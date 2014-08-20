@@ -10,9 +10,15 @@ import java.util.Scanner;
 
 public class CreatePlayerCharacter {
 	
+	String newCharacter;
+	
+	public CreatePlayerCharacter(String newCharacterName){
+		newCharacter = newCharacterName;
+	}
+	
 	public void create(){
 		try{
-			FileReader readFile = new FileReader("BasicCharacterinfo.txt");
+			FileReader readFile = new FileReader(newCharacter + "BasicInfo.txt");
 			Scanner in = new Scanner(readFile);
 			PlayerCharacter Grell = new PlayerCharacter(in.nextLine(), in.nextLine(), in.nextLine(), 
 					Integer.parseInt(in.nextLine()), Integer.parseInt(in.nextLine()), Integer.parseInt(in.nextLine()));
@@ -38,7 +44,7 @@ public class CreatePlayerCharacter {
 		basicInfo[5] = "Weight(kg)";
 		
 		try{
-			PrintWriter out = new PrintWriter("BasicCharacterInfo.txt");
+			PrintWriter out = new PrintWriter(newCharacter + "BasicInfo.txt");
 			Scanner in = new Scanner(System.in);
 			
 			for(int i = 0; i < 6; i++){
@@ -69,7 +75,7 @@ public class CreatePlayerCharacter {
 		abilityNames[5] = "CHARISMA";
 		
 		try{
-			PrintWriter out = new PrintWriter("CharacterAttributes.txt");
+			PrintWriter out = new PrintWriter(newCharacter + "Attributes.txt");
 			
 			for(int i = 0; i < 6; i++){
 			

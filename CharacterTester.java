@@ -5,7 +5,7 @@ public class CharacterTester {
 		// TODO Auto-generated method stub
 		
 		
-		CreatePlayerCharacter test = new CreatePlayerCharacter();
+		CreatePlayerCharacter test = new CreatePlayerCharacter("Grell");
 		
 		test.enterBasicInfo();
 		test.enterValues();
