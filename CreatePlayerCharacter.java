@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class CreatePlayerCharacter {
 	
 	String newCharacter;
+	String tempRace;
 	
 	public CreatePlayerCharacter(String newCharacterName){
 		newCharacter = newCharacterName;
@@ -29,7 +30,7 @@ public class CreatePlayerCharacter {
 			System.out.println();
 			Grell.printSkillTable();
 		}catch(Exception ex){
-			System.out.println("Exception " + ex.getMessage() + " caught.");
+			System.out.println("Exception " + ex.getMessage() + " caught in create.");
 		}
 	}
 	
@@ -49,13 +50,25 @@ public class CreatePlayerCharacter {
 			
 			for(int i = 0; i < 6; i++){
 				System.out.println("Enter " + basicInfo[i] + ": ");
-				out.println(in.nextLine());
+				
+				if(i == 1){
+//					tempRace = in.nextLine(); //need to use the race to adjust ability scores accordingly
+//					out.flush();
+//					out.println(tempRace);
+					
+					tempRace = "Human";
+					out.println(in.nextLine());
+				}
+				
+				else{
+					out.println(in.nextLine());
+				}
 			}
 			
 			out.close();
 			
 		}catch(Exception ex){
-			System.out.println("Exception " + ex.getMessage() + " caught");
+			System.out.println("Exception " + ex.getMessage() + " caught in enterBasicInfo");
 		}
 		
 	}
@@ -63,7 +76,7 @@ public class CreatePlayerCharacter {
 	public void enterValues(){ 
 		Scanner in = new Scanner(System.in);
 		
-		
+		int temp;
 		
 		String[] abilityNames = new String[6];
 		
@@ -77,16 +90,156 @@ public class CreatePlayerCharacter {
 		try{
 			PrintWriter out = new PrintWriter(newCharacter + "Attributes.txt");
 			
-			for(int i = 0; i < 6; i++){
+			if(tempRace == "Dragonborn"){ //+2 strength and charisma
+				for(int i = 0; i < 6; i++){
+					
+					System.out.println("Enter base " + abilityNames[i] + ": ");
+					
+					if(i == 0 || i == 5){
+						temp = in.nextInt();
+						temp += 2;
+						out.println(temp);
+					}
+				
+					else{
+						out.println(in.nextInt());	
+					}
+				}
+			}
 			
-				System.out.println("Enter base " + abilityNames[i] + ": ");
-				out.println(in.nextInt());
+			else if(tempRace == "Dwarf"){ //+2 constitution and wisdom
+				for(int i = 0; i < 6; i++){
+
+					System.out.println("Enter base " + abilityNames[i] + ": ");
+
+					if(i == 1 || i == 4){
+						temp = in.nextInt();
+						temp += 2;
+						out.println(temp);
+					}
+
+					else{
+						out.println(in.nextInt());	
+					}
+				}
+			}
+			
+			else if(tempRace == "Eladrin"){ //+2 intelligence and dexterity
+				for(int i = 0; i < 6; i++){
+
+					System.out.println("Enter base " + abilityNames[i] + ": ");
+
+					if(i == 2 || i == 3){
+						temp = in.nextInt();
+						temp += 2;
+						out.println(temp);
+					}
+
+					else{
+						out.println(in.nextInt());	
+					}
+				}
+			}
+			
+			else if(tempRace == "Elf"){ //+2 dexterity and wisdom
+				for(int i = 0; i < 6; i++){
+
+					System.out.println("Enter base " + abilityNames[i] + ": ");
+
+					if(i == 2 || i == 4){
+						temp = in.nextInt();
+						temp += 2;
+						out.println(temp);
+					}
+
+					else{
+						out.println(in.nextInt());	
+					}
+				}
+			}
+			
+			else if(tempRace == "Half-Elf"){ //+2 constitution and charisma
+				for(int i = 0; i < 6; i++){
+
+					System.out.println("Enter base " + abilityNames[i] + ": ");
+
+					if(i == 1 || i == 5){
+						temp = in.nextInt();
+						temp += 2;
+						out.println(temp);
+					}
+
+					else{
+						out.println(in.nextInt());	
+					}
+				}
+			}
+			
+			else if(tempRace == "Halfling"){ //+2 dexterity and charisma
+				for(int i = 0; i < 6; i++){
+
+					System.out.println("Enter base " + abilityNames[i] + ": ");
+
+					if(i == 2 || i == 5){
+						temp = in.nextInt();
+						temp += 2;
+						out.println(temp);
+					}
+
+					else{
+						out.println(in.nextInt());	
+					}
+				}
+			}
+			
+			if(tempRace == "Human"){ //+2 to one attribute of your choice
+				
+				int choiceAttribute;
+				
+				System.out.println("Choose attribute for racial bonus (+2): ");
+				for(int i = 0; i < 6; i++){
+					System.out.println(abilityNames[i] + ": " + i);
+				}
+				
+				choiceAttribute = in.nextInt();
+				System.out.println();
+				
+				for(int i = 0; i < 6; i++){
+
+					System.out.println("Enter base " + abilityNames[i] + ": ");
+
+					if(i == choiceAttribute){
+						temp = in.nextInt();
+						temp += 2;
+						out.println(temp);
+					}
+
+					else{
+						out.println(in.nextInt());	
+					}
+				}
+			}
+			
+			if(tempRace == "Tiefling"){ //+2 to intelligence and charisma
+				for(int i = 0; i < 6; i++){
+
+					System.out.println("Enter base " + abilityNames[i] + ": ");
+
+					if(i == 3 || i == 5){
+						temp = in.nextInt();
+						temp += 2;
+					}
+
+					else{
+						out.println(in.nextInt());	
+					}
+				}
 			}
 			
 			out.close();
 			
 		}catch(Exception ex){
-			System.out.println("Exception " + ex.getMessage() + " caught.");
+			System.out.println("Exception " + ex.getMessage() + " caught in enter attributes.");
 		}	
 		
 	}

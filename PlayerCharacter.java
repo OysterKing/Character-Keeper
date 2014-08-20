@@ -44,7 +44,7 @@ public class PlayerCharacter {
 					abilities[i].calculateAbilityMod();
 				}
 			}catch(Exception ex){
-				System.out.println("Exception " + ex.getMessage() + " caught.");
+				System.out.println("Exception " + ex.getMessage() + " caught in PlayerCharacter.");
 			}
 			
 			//Load skills.
