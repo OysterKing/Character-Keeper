@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
 
@@ -199,6 +200,21 @@ public class PlayerCharacter {
 		System.out.println("Age: " + age);
 		System.out.println("Height(cm): " + height);
 		System.out.println("Weight(kilo): " + weight);
+	}
+	
+	public void printInventory(){
+		try {
+			FileReader inFile = new FileReader(characterFilePrefix + "Inventory.txt");
+			Scanner in = new Scanner(inFile);
+			while(in.hasNextLine()){
+				System.out.println(in.nextLine());
+			}
+			System.out.println();
+			
+		} catch (Exception ex) {
+			System.out.println("Exception " + ex.getMessage() + " caught in printInventory.");
+			
+		}
 	}
 	
 	public void printAbilityTable(){

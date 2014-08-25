@@ -19,15 +19,23 @@ public class CreatePlayerCharacter {
 	public void create(){
 		try{
 			FileReader readFile = new FileReader(newCharacter + "BasicInfo.txt");
+//			PrintWriter newInventory = new PrintWriter(newCharacter + "Inventory.txt");
 			Scanner in = new Scanner(readFile);
-			PlayerCharacter Grell = new PlayerCharacter(in.nextLine(), in.nextLine(), in.nextLine(), 
+			
+			PlayerCharacter character = new PlayerCharacter(in.nextLine(), in.nextLine(), in.nextLine(), 
 					Integer.parseInt(in.nextLine()), Integer.parseInt(in.nextLine()), Integer.parseInt(in.nextLine()));
+			
+//			newInventory.println("100"); //a new character starts with 100 gold pieces to spend on equipment.
 
-			Grell.print_basic_info();
+			character.print_basic_info();
 			System.out.println();
-			Grell.printAbilityTable();
+			character.printAbilityTable();
 			System.out.println();
-			Grell.printSkillTable();
+			character.printSkillTable();
+			System.out.println();
+//			character.printInventory();
+			in.close();
+//			newInventory.close();
 		}catch(Exception ex){
 			System.out.println("Exception " + ex.getMessage() + " caught in create.");
 		}
@@ -93,7 +101,6 @@ public class CreatePlayerCharacter {
 
 			while(inFile.hasNextLine()){
 				
-				System.out.println("CHECK");
 				String line = inFile.nextLine();
 
 				if("Dragonborn".equals(line)){ //+2 strength and charisma
@@ -243,7 +250,8 @@ public class CreatePlayerCharacter {
 
 
 
-				else if("Tiefling".equals(line)){ //+2 to intelligence and charisma
+				else if("Tiefling".equals(line)) { //+2 to intelligence and charisma, Tiefling
+					System.out.println("t");
 					for(int i = 0; i < 6; i++){
 
 						System.out.println("Enter base " + abilityNames[i] + ": ");
@@ -251,6 +259,7 @@ public class CreatePlayerCharacter {
 						if(i == 3 || i == 5){
 							temp = in.nextInt();
 							temp += 2;
+							out.println(temp);
 						}
 
 						else{
@@ -264,7 +273,7 @@ public class CreatePlayerCharacter {
 			inFile.close();
 
 		}catch(Exception ex){
-			System.out.println("Exception " + ex.getMessage() + " caught in enter attributes.");
+			System.out.println("Exception " + ex.getMessage() + " caught in enterValues.");
 		}	
 
 	}
